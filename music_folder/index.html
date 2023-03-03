@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="whole">
+      <div class="nav">
+        <img src="assets/logo.png" id="logo" />
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Productions</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="content">
+      <div class="left">
+        <h1>pattu<br />kelunga</h1>
+      </div>
+      <div class="right">
+        <p>Click to listen</p>
+        <div id="pl">
+          <img src="assets/play.png" id="icon" />
+          <audio id="mysong" src="assets/sound.mp3"></audio>
+        </div>
+        <div id="progress"></div>
+        <span id="p">0:00</div>
+      </div>
+    </div>
+
+    <script>
+      var song = document.getElementById("mysong");
+      var icon = document.getElementById("icon");
+      var progress = document.getElementById("progress");
+      var p = document.getElementById("p");
+      song.addEventListener("timeupdate", function () {
+        var currentTime = song.currentTime;
+        var duration = song.duration;
+        var prog = (currentTime / duration) * 100;
+        progress.style.width = prog + "%";
+        var minutes = Math.floor(currentTime / 60);
+  var seconds = Math.floor(currentTime % 60);
+  var durationText = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+  
+  p.textContent = durationText;
+       
+        console.log(p.innerHTML);
+      });
+      console.log(icon.src);
+      console.log("hi");
+      icon.onclick = function () {
+        icon.src = "assets/pause.png";
+        if (song.paused) {
+          song.play();
+        } else if (song.onended) {
+          icon.src = "assets/pause.png";
+        } else {
+          song.pause();
+          icon.src = "assets/play.png";
+        }
+      };
+    </script>
+  </body>
+</html>
